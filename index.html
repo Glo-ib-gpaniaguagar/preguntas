@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Aleatorias</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Preguntas Aleatorias</h1>
+        <div class="card mt-4">
+            <div class="card-body">
+                <p id="pregunta" class="fs-4 text-center">Presiona el botón para empezar</p>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+            <button id="btnNuevaPregunta" class="btn btn-primary">Nueva Pregunta</button>
+        </div>
+    </div>
+
+    <script>
+        // Lista de preguntas
+        const preguntas = [
+            "Elige a alguien del equipo que creas que sería más útil en un apocalipsis zombie",
+            "Elige a alguien del equipo que creas que tendría la caligrafía más bonita del equipo",
+            "Elige a alguien del equipo que creas que sería un buen dictador benevolente"
+        ];
+
+        let preguntasRestantes = [...preguntas];
+
+        // Referencias a elementos del DOM
+        const preguntaElemento = document.getElementById('pregunta');
+        const botonNuevaPregunta = document.getElementById('btnNuevaPregunta');
+
+        // Función para elegir una nueva pregunta
+        function nuevaPregunta() {
+            if (preguntasRestantes.length === 0) {
+                preguntaElemento.textContent = "Ya no hay más preguntas disponibles.";
+                botonNuevaPregunta.disabled = true;
+                return;
+            }
+
+            const indiceAleatorio = Math.floor(Math.random() * preguntasRestantes.length);
+            const preguntaSeleccionada = preguntasRestantes[indiceAleatorio];
+
+            // Mostrar la pregunta seleccionada
+            preguntaElemento.textContent = preguntaSeleccionada;
+
+            // Eliminar la pregunta seleccionada de la lista
+            preguntasRestantes.splice(indiceAleatorio, 1);
+        }
+
+        // Asignar evento al botón
+        botonNuevaPregunta.addEventListener('click', nuevaPregunta);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
